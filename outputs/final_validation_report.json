@@ -1,0 +1,21 @@
+{
+  "source_rows": {
+    "actuals": 1488,
+    "forecasts": 17536
+  },
+  "quality": {
+    "actual_invalid_timestamps": 0,
+    "forecast_invalid_delivery_timestamps": 0,
+    "forecast_invalid_publication_timestamps": 0,
+    "actual_duplicate_delivery_timestamps": 0,
+    "forecast_duplicate_delivery_publication_pairs": 0
+  },
+  "evaluation": {
+    "decision_lead_hours": 24,
+    "matched_observations": 717,
+    "mae": 1984.9205020920501,
+    "rmse": 2438.059239140117,
+    "bias": 1767.4853556485355,
+    "mape_percent": 20.481946425606907
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "period": "January 2026",
+  "actual_half_hour_records": 1488,
+  "expected_half_hour_records": 1488,
+  "actual_hourly_records": 744,
+  "matched_forecast_hours": 717,
+  "unmatched_actual_hours": 27,
+  "forecast_minimum_lead_hours": 24,
+  "mae": 1984.9205020920501,
+  "rmse": 2438.059239140117,
+  "bias": 1767.4853556485355,
+  "mape_percent": 20.481946425606907
+}

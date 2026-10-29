@@ -1,0 +1,27 @@
+{
+  "filters": [
+    "Delivery date range",
+    "Minimum forecast lead time"
+  ],
+  "kpis": [
+    "Matched forecast hours",
+    "MAE",
+    "RMSE",
+    "Forecast bias",
+    "MAPE"
+  ],
+  "visualizations": [
+    "Hourly forecast vs actual time series",
+    "Forecast error over time",
+    "Daily accuracy trend",
+    "MAE by hour of day",
+    "Accuracy by forecast lead time"
+  ],
+  "data_scope": "UK national wind generation, January 2026",
+  "forecast_policy": "Latest forecast published at or before the configured delivery-time cutoff",
+  "limitations": [
+    "Forecast cutoff is an analytical assumption until verified.",
+    "Coverage is limited to the supplied data.",
+    "Accuracy results apply only to matched observations."
+  ]
+}
