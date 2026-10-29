@@ -113,7 +113,7 @@ export const DataQualityPage: React.FC = () => {
             title="Daily Record Cadence (Actuals vs Forecast Vintages)"
             subtitle="Actuals show perfectly steady 48 half-hours/day; forecasts show multiple vintages"
           >
-            <div className="w-full h-56">
+            <div className="w-full h-56 min-w-0">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={dailyCounts || []} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
@@ -145,8 +145,8 @@ export const DataQualityPage: React.FC = () => {
         title="Zero-Defect Data Quality Validation Matrix"
         subtitle="Verification against schema integrity, temporal validity, and physical constraints"
       >
-        <div className="w-full overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="w-full overflow-x-auto touch-scroll">
+          <table className="w-full text-left text-xs min-w-[550px]">
             <thead>
               <tr className="border-b border-slate-200 text-slate-500 font-semibold uppercase text-[10px] bg-slate-50">
                 <th className="py-2.5 px-3">Validation Check</th>

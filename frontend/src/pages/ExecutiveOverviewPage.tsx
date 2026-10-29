@@ -96,7 +96,7 @@ export const ExecutiveOverviewPage: React.FC = () => {
               over-estimating wind generation across 83.4% of evaluated hours and requiring upward reserve procurement by National Grid ESO.
             </p>
           </div>
-          <div className="shrink-0 flex items-center space-x-3 text-right">
+          <div className="shrink-0 flex items-center space-x-3 text-left sm:text-right pt-2 md:pt-0 border-t md:border-t-0 border-slate-100">
             <div className="border-r border-slate-200 pr-3">
               <div className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold">Evaluated Hours</div>
               <div className="text-sm font-bold font-mono text-slate-900">{matchedHours} / {totalHours}h</div>

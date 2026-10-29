@@ -20,8 +20,8 @@ export const CutoffDetailsTable: React.FC<Props> = ({ comparison }) => {
   }
 
   return (
-    <div className="w-full overflow-x-auto">
-      <table className="w-full text-left text-xs">
+    <div className="w-full overflow-x-auto touch-scroll">
+      <table className="w-full text-left text-xs min-w-[500px]">
         <thead>
           <tr className="border-b border-slate-200 text-slate-500 font-semibold uppercase text-[10px] tracking-wider bg-slate-50">
             <th className="py-2.5 px-3">Horizon / Cutoff</th>
@@ -47,7 +47,7 @@ export const CutoffDetailsTable: React.FC<Props> = ({ comparison }) => {
                   is24h ? 'bg-blue-50/60 font-medium' : ''
                 }`}
               >
-                <td className="py-2.5 px-3 text-slate-900 font-mono flex items-center space-x-1.5">
+                <td className="py-2.5 px-3 text-slate-900 font-mono flex items-center space-x-1.5 whitespace-nowrap">
                   <span className="font-bold">{r.cutoff_hours}h</span>
                   {is24h && (
                     <span className="text-[9px] px-1.5 py-0.2 bg-blue-600 text-white rounded font-mono font-semibold">
@@ -55,20 +55,20 @@ export const CutoffDetailsTable: React.FC<Props> = ({ comparison }) => {
                     </span>
                   )}
                 </td>
-                <td className="py-2.5 px-3 text-slate-600 text-[11px]">
+                <td className="py-2.5 px-3 text-slate-600 text-[11px] min-w-[140px]">
                   {contextText}
                 </td>
-                <td className="py-2.5 px-3 text-right text-slate-700 font-mono">
+                <td className="py-2.5 px-3 text-right text-slate-700 font-mono whitespace-nowrap">
                   {formatPercent(r.full_coverage.coverage_pct)}
                 </td>
-                <td className="py-2.5 px-3 text-right text-slate-900 font-mono font-bold">
+                <td className="py-2.5 px-3 text-right text-slate-900 font-mono font-bold whitespace-nowrap">
                   {formatNumber(commonMae, 1)} MW
                 </td>
-                <td className="py-2.5 px-3 text-right text-slate-700 font-mono">
+                <td className="py-2.5 px-3 text-right text-slate-700 font-mono whitespace-nowrap">
                   {formatNumber(commonRmse, 1)} MW
                 </td>
                 <td
-                  className={`py-2.5 px-3 text-right font-mono font-semibold ${
+                  className={`py-2.5 px-3 text-right font-mono font-semibold whitespace-nowrap ${
                     commonBias && commonBias > 0 ? 'text-amber-700' : 'text-blue-700'
                   }`}
                 >
@@ -81,7 +81,7 @@ export const CutoffDetailsTable: React.FC<Props> = ({ comparison }) => {
           })}
         </tbody>
       </table>
-      <div className="pt-2 px-3 text-[10px] text-slate-400 font-mono flex justify-between">
+      <div className="pt-2 px-3 text-[10px] text-slate-400 font-mono flex flex-col sm:flex-row sm:justify-between gap-1">
         <span>* MAE, RMSE, and Bias calculated on balanced 551-hour common intersection</span>
         <span>Coverage = Full 744h January sample</span>
       </div>

@@ -39,9 +39,9 @@ export const ErrorDistributionChart: React.FC<Props> = ({ distribution }) => {
   const p95 = distribution.summary.percentile_95_abs;
 
   return (
-    <div className="w-full flex flex-col h-full justify-between">
+    <div className="w-full flex flex-col h-full justify-between min-w-0">
       {/* Histogram */}
-      <div className="w-full h-48">
+      <div className="w-full h-48 min-w-0">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
             <CartesianGrid strokeDasharray="2 2" stroke="#e2e8f0" vertical={false} />
@@ -84,36 +84,36 @@ export const ErrorDistributionChart: React.FC<Props> = ({ distribution }) => {
       </div>
 
       {/* Legend indicator */}
-      <div className="flex items-center justify-center space-x-4 text-[10px] text-slate-500 py-1">
+      <div className="flex items-center justify-center space-x-3 sm:space-x-4 text-[10px] text-slate-500 py-1">
         <div className="flex items-center space-x-1">
           <span className="w-2.5 h-2.5 bg-blue-600 rounded-xs inline-block" />
-          <span>Under-forecast (&lt; 0 MW)</span>
+          <span className="truncate">Under (&lt;0 MW)</span>
         </div>
         <div className="flex items-center space-x-1">
           <span className="w-2.5 h-2.5 bg-amber-600 rounded-xs inline-block" />
-          <span>Over-forecast (&gt; 0 MW)</span>
+          <span className="truncate">Over (&gt;0 MW)</span>
         </div>
       </div>
 
       {/* Percentiles Summary Row */}
-      <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-100 text-center">
-        <div className="bg-slate-50 p-2 rounded border border-slate-100">
-          <div className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Median Error</div>
-          <div className="text-xs font-bold font-mono text-amber-700 mt-0.5">
+      <div className="grid grid-cols-3 gap-1.5 sm:gap-2 pt-2 border-t border-slate-100 text-center">
+        <div className="bg-slate-50 p-1.5 sm:p-2 rounded border border-slate-100">
+          <div className="text-[9px] sm:text-[10px] text-slate-500 font-semibold uppercase tracking-wider truncate">Median</div>
+          <div className="text-[11px] sm:text-xs font-bold font-mono text-amber-700 mt-0.5">
             {medianErr !== null && medianErr !== undefined
               ? `${medianErr > 0 ? '+' : ''}${formatNumber(medianErr, 0)} MW`
               : '—'}
           </div>
         </div>
-        <div className="bg-slate-50 p-2 rounded border border-slate-100">
-          <div className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">P90 |Error|</div>
-          <div className="text-xs font-bold font-mono text-slate-900 mt-0.5">
+        <div className="bg-slate-50 p-1.5 sm:p-2 rounded border border-slate-100">
+          <div className="text-[9px] sm:text-[10px] text-slate-500 font-semibold uppercase tracking-wider truncate">P90 |Err|</div>
+          <div className="text-[11px] sm:text-xs font-bold font-mono text-slate-900 mt-0.5">
             {p90 ? `${formatNumber(p90, 0)} MW` : '—'}
           </div>
         </div>
-        <div className="bg-slate-50 p-2 rounded border border-slate-100">
-          <div className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">P95 |Error|</div>
-          <div className="text-xs font-bold font-mono text-rose-700 mt-0.5">
+        <div className="bg-slate-50 p-1.5 sm:p-2 rounded border border-slate-100">
+          <div className="text-[9px] sm:text-[10px] text-slate-500 font-semibold uppercase tracking-wider truncate">P95 |Err|</div>
+          <div className="text-[11px] sm:text-xs font-bold font-mono text-rose-700 mt-0.5">
             {p95 ? `${formatNumber(p95, 0)} MW` : '—'}
           </div>
         </div>

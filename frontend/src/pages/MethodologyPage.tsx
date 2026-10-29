@@ -60,8 +60,8 @@ export const MethodologyPage: React.FC = () => {
         title="Accuracy Metrics Formulations & Interpretations"
         subtitle="Explicit error definitions and sensitivity characteristics"
       >
-        <div className="w-full overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="w-full overflow-x-auto touch-scroll">
+          <table className="w-full text-left text-xs min-w-[500px]">
             <thead>
               <tr className="border-b border-slate-200 text-slate-500 font-semibold uppercase text-[10px] bg-slate-50">
                 <th className="py-2.5 px-3">Metric</th>
@@ -73,9 +73,9 @@ export const MethodologyPage: React.FC = () => {
             <tbody className="divide-y divide-slate-100">
               {methodology?.metrics?.map((m, i) => (
                 <tr key={i} className="hover:bg-slate-50">
-                  <td className="py-3 px-3 font-bold text-navy-900">{m.name}</td>
-                  <td className="py-3 px-3 font-mono text-slate-600">{m.unit}</td>
-                  <td className="py-3 px-3 font-mono text-slate-800 bg-slate-50/60">{m.formula}</td>
+                  <td className="py-3 px-3 font-bold text-navy-900 whitespace-nowrap">{m.name}</td>
+                  <td className="py-3 px-3 font-mono text-slate-600 whitespace-nowrap">{m.unit}</td>
+                  <td className="py-3 px-3 font-mono text-slate-800 bg-slate-50/60 whitespace-nowrap">{m.formula}</td>
                   <td className="py-3 px-3 text-slate-600 leading-snug">{m.interpretation}</td>
                 </tr>
               ))}
@@ -102,26 +102,28 @@ export const MethodologyPage: React.FC = () => {
                 </div>
               </div>
 
-              <table className="w-full text-left text-xs">
-                <thead>
-                  <tr className="text-slate-500 text-[10px] uppercase font-semibold">
-                    <th className="py-1.5 px-2">Field</th>
-                    <th className="py-1.5 px-2">Type</th>
-                    <th className="py-1.5 px-2">Unit</th>
-                    <th className="py-1.5 px-2">Description</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {s.fields.map((f, fi) => (
-                    <tr key={fi}>
-                      <td className="py-1.5 px-2 font-mono font-semibold text-navy-900">{f.field_name}</td>
-                      <td className="py-1.5 px-2 font-mono text-slate-500">{f.data_type}</td>
-                      <td className="py-1.5 px-2 text-slate-600">{f.unit || '—'}</td>
-                      <td className="py-1.5 px-2 text-slate-600">{f.description}</td>
+              <div className="w-full overflow-x-auto touch-scroll">
+                <table className="w-full text-left text-xs min-w-[400px]">
+                  <thead>
+                    <tr className="text-slate-500 text-[10px] uppercase font-semibold">
+                      <th className="py-1.5 px-2">Field</th>
+                      <th className="py-1.5 px-2">Type</th>
+                      <th className="py-1.5 px-2">Unit</th>
+                      <th className="py-1.5 px-2">Description</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {s.fields.map((f, fi) => (
+                      <tr key={fi}>
+                        <td className="py-1.5 px-2 font-mono font-semibold text-navy-900 whitespace-nowrap">{f.field_name}</td>
+                        <td className="py-1.5 px-2 font-mono text-slate-500 whitespace-nowrap">{f.data_type}</td>
+                        <td className="py-1.5 px-2 text-slate-600 whitespace-nowrap">{f.unit || '—'}</td>
+                        <td className="py-1.5 px-2 text-slate-600">{f.description}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           ))}
 

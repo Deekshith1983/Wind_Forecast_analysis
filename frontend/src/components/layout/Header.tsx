@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Menu, Activity } from 'lucide-react';
 import { useGlobalFilters } from '../../context/FilterContext';
 import type { CutoffHours } from '../../types/api';
 
@@ -35,7 +35,12 @@ const cutoffOptions: { value: CutoffHours; label: string; tag: string }[] = [
   { value: 1, label: '1h Cutoff', tag: 'Gate Closure (Balancing Mechanism)' },
 ];
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  onToggleSidebar: () => void;
+  isSidebarOpen: boolean;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onToggleSidebar, isSidebarOpen }) => {
   const location = useLocation();
   const { cutoffHours, setCutoffHours } = useGlobalFilters();
 
@@ -47,43 +52,63 @@ export const Header: React.FC = () => {
   const activeCutoffMeta = cutoffOptions.find((o) => o.value === cutoffHours);
 
   return (
-    <header className="bg-white border-b border-slate-200 px-6 py-3 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-20">
-      {/* Title & Context */}
-      <div>
-        <div className="flex items-center space-x-2">
-          <h2 className="text-lg font-bold text-slate-900 tracking-tight">
-            {currentInfo.title}
-          </h2>
-          {cutoffHours === 24 && (
-            <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 font-semibold">
-              Day-Ahead Focus
-            </span>
-          )}
+    <header className="bg-white border-b border-slate-200 px-3 sm:px-4 lg:px-6 py-2.5 sm:py-3 flex flex-col md:flex-row md:items-center justify-between gap-3 sticky top-0 z-20">
+      {/* Top / Left Section: Hamburger Menu + Page Context */}
+      <div className="flex items-center space-x-2.5 sm:space-x-3 min-w-0">
+        {/* Hamburger Menu Button (visible on mobile & tablet <1024px) */}
+        <button
+          type="button"
+          onClick={onToggleSidebar}
+          className="lg:hidden p-2 -ml-1 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shrink-0 min-w-[40px] min-h-[40px] flex items-center justify-center transition-colors"
+          aria-label={isSidebarOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={isSidebarOpen}
+          aria-controls="mobile-navigation"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+
+        {/* Mobile Mini Logo Icon (visible on mobile only) */}
+        <div className="lg:hidden w-7 h-7 rounded bg-blue-600 flex items-center justify-center text-white shrink-0 sm:hidden">
+          <Activity className="w-3.5 h-3.5" />
         </div>
-        <p className="text-xs text-slate-500 mt-0.5 max-w-2xl">
-          {currentInfo.subtitle}
-        </p>
+
+        {/* Title and Context */}
+        <div className="min-w-0">
+          <div className="flex items-center space-x-2 flex-wrap gap-y-1">
+            <h2 className="text-sm sm:text-base lg:text-lg font-bold text-slate-900 tracking-tight truncate">
+              {currentInfo.title}
+            </h2>
+            {cutoffHours === 24 && (
+              <span className="text-[9px] sm:text-[10px] font-mono uppercase px-1.5 sm:px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 font-semibold shrink-0">
+                Day-Ahead Focus
+              </span>
+            )}
+          </div>
+          <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 truncate hidden sm:block max-w-xl">
+            {currentInfo.subtitle}
+          </p>
+        </div>
       </div>
 
-      {/* Global Filter Controls */}
-      <div className="flex items-center space-x-3 shrink-0">
-        {/* Evaluation Period */}
-        <div className="border border-slate-200 rounded px-3 py-1.5 bg-slate-50 text-left">
-          <div className="text-[9px] uppercase tracking-wider text-slate-500 font-semibold">
-            Evaluation Period
+      {/* Right / Filter Controls Section */}
+      <div className="flex items-center space-x-2 sm:space-x-3 shrink-0 self-end md:self-auto w-full md:w-auto justify-end">
+        {/* Evaluation Period (collapsed on smallest screens) */}
+        <div className="hidden xs:block border border-slate-200 rounded px-2.5 py-1 sm:px-3 sm:py-1.5 bg-slate-50 text-left">
+          <div className="text-[8px] sm:text-[9px] uppercase tracking-wider text-slate-500 font-semibold leading-tight">
+            Period
           </div>
-          <div className="text-xs font-mono font-medium text-slate-800">
-            01–31 Jan 2026 (744h)
+          <div className="text-[11px] sm:text-xs font-mono font-medium text-slate-800">
+            01–31 Jan 2026
           </div>
         </div>
 
-        {/* Forecast Cutoff Selector */}
-        <div className="border border-slate-200 rounded px-3 py-1.5 bg-white text-left relative focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
+        {/* Forecast Cutoff Selector (Primary Interactive Filter) */}
+        <div className="border border-slate-200 rounded px-2.5 py-1 sm:px-3 sm:py-1.5 bg-white text-left relative focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 flex-1 xs:flex-initial">
           <div className="flex items-center justify-between space-x-2">
-            <span className="text-[9px] uppercase tracking-wider text-slate-500 font-semibold">
+            <span className="text-[8px] sm:text-[9px] uppercase tracking-wider text-slate-500 font-semibold leading-tight">
               Decision Cutoff
             </span>
-            <span className="text-[9px] font-mono text-slate-400">
+            <span className="text-[8px] sm:text-[9px] font-mono text-slate-400 hidden sm:inline">
               {activeCutoffMeta?.tag}
             </span>
           </div>
@@ -91,11 +116,12 @@ export const Header: React.FC = () => {
             <select
               value={cutoffHours}
               onChange={(e) => setCutoffHours(Number(e.target.value) as CutoffHours)}
+              aria-label="Select forecast decision cutoff horizon"
               className="appearance-none w-full bg-transparent pr-6 text-xs font-semibold text-slate-900 focus:outline-none cursor-pointer"
             >
               {cutoffOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>
-                  {opt.value}h Cutoff — {opt.tag}
+                  {opt.value}h Cutoff — {opt.label}
                 </option>
               ))}
             </select>
@@ -103,12 +129,12 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Time Standard */}
-        <div className="border border-slate-200 rounded px-2.5 py-1.5 bg-slate-50 text-left">
-          <div className="text-[9px] uppercase tracking-wider text-slate-500 font-semibold">
-            Timezone
+        {/* Time Standard Pill */}
+        <div className="border border-slate-200 rounded px-2 py-1 sm:px-2.5 sm:py-1.5 bg-slate-50 text-left shrink-0">
+          <div className="text-[8px] sm:text-[9px] uppercase tracking-wider text-slate-500 font-semibold leading-tight">
+            Zone
           </div>
-          <div className="text-xs font-mono font-semibold text-slate-800">
+          <div className="text-[11px] sm:text-xs font-mono font-semibold text-slate-800">
             UTC
           </div>
         </div>
@@ -116,4 +142,3 @@ export const Header: React.FC = () => {
     </header>
   );
 };
-

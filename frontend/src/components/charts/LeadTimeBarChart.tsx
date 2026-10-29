@@ -48,7 +48,7 @@ export const LeadTimeBarChart: React.FC<Props> = ({ comparison }) => {
   });
 
   return (
-    <div className="w-full flex flex-col h-full">
+    <div className="w-full flex flex-col h-full min-w-0">
       {/* Metric Selector Pills & Sample Annotation */}
       <div className="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-100">
         <span className="text-[10px] font-mono text-slate-500">
@@ -73,7 +73,7 @@ export const LeadTimeBarChart: React.FC<Props> = ({ comparison }) => {
         </div>
       </div>
 
-      <div className="w-full h-56">
+      <div className="w-full h-56 min-w-0">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData} margin={{ top: 20, right: 10, left: -10, bottom: 0 }}>
             <CartesianGrid strokeDasharray="2 2" stroke="#e2e8f0" vertical={false} />

@@ -35,14 +35,14 @@ export const ActualForecastChart: React.FC<Props> = ({ data, heightClass = 'h-80
   }, [data, period]);
 
   return (
-    <div className="w-full flex flex-col h-full">
+    <div className="w-full flex flex-col h-full min-w-0">
       {/* Controls Bar: Time Slices and View Toggle */}
-      <div className="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-100">
-        {/* Period Filter Buttons */}
-        <div className="flex items-center space-x-1 bg-slate-100 p-0.5 rounded text-[11px] font-medium text-slate-600">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-100">
+        {/* Period Filter Buttons (Horizontally scrollable on mobile) */}
+        <div className="flex items-center space-x-1 bg-slate-100 p-0.5 rounded text-[11px] font-medium text-slate-600 overflow-x-auto touch-scroll max-w-full shrink-0">
           <button
             onClick={() => setPeriod('all')}
-            className={`px-2 py-0.5 rounded ${
+            className={`px-2 py-1 sm:py-0.5 rounded whitespace-nowrap ${
               period === 'all' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
             }`}
           >
@@ -50,7 +50,7 @@ export const ActualForecastChart: React.FC<Props> = ({ data, heightClass = 'h-80
           </button>
           <button
             onClick={() => setPeriod('w1')}
-            className={`px-2 py-0.5 rounded ${
+            className={`px-2 py-1 sm:py-0.5 rounded whitespace-nowrap ${
               period === 'w1' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
             }`}
           >
@@ -58,7 +58,7 @@ export const ActualForecastChart: React.FC<Props> = ({ data, heightClass = 'h-80
           </button>
           <button
             onClick={() => setPeriod('w2')}
-            className={`px-2 py-0.5 rounded ${
+            className={`px-2 py-1 sm:py-0.5 rounded whitespace-nowrap ${
               period === 'w2' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
             }`}
           >
@@ -66,7 +66,7 @@ export const ActualForecastChart: React.FC<Props> = ({ data, heightClass = 'h-80
           </button>
           <button
             onClick={() => setPeriod('w3')}
-            className={`px-2 py-0.5 rounded ${
+            className={`px-2 py-1 sm:py-0.5 rounded whitespace-nowrap ${
               period === 'w3' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
             }`}
           >
@@ -74,7 +74,7 @@ export const ActualForecastChart: React.FC<Props> = ({ data, heightClass = 'h-80
           </button>
           <button
             onClick={() => setPeriod('w4')}
-            className={`px-2 py-0.5 rounded ${
+            className={`px-2 py-1 sm:py-0.5 rounded whitespace-nowrap ${
               period === 'w4' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
             }`}
           >
@@ -82,7 +82,7 @@ export const ActualForecastChart: React.FC<Props> = ({ data, heightClass = 'h-80
           </button>
           <button
             onClick={() => setPeriod('w5')}
-            className={`px-2 py-0.5 rounded ${
+            className={`px-2 py-1 sm:py-0.5 rounded whitespace-nowrap ${
               period === 'w5' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
             }`}
           >
@@ -91,20 +91,20 @@ export const ActualForecastChart: React.FC<Props> = ({ data, heightClass = 'h-80
         </div>
 
         {/* View Mode Toggle */}
-        <div className="flex items-center space-x-1 bg-slate-100 p-0.5 rounded text-[11px] font-medium text-slate-600">
+        <div className="flex items-center space-x-1 bg-slate-100 p-0.5 rounded text-[11px] font-medium text-slate-600 self-start sm:self-auto shrink-0">
           <button
             onClick={() => setViewMode('generation')}
-            className={`px-2.5 py-0.5 rounded ${
+            className={`px-2.5 py-1 sm:py-0.5 rounded whitespace-nowrap ${
               viewMode === 'generation'
                 ? 'bg-blue-600 text-white font-semibold shadow-xs'
                 : 'hover:text-slate-900'
             }`}
           >
-            Actual vs Forecast (MW)
+            Actual vs Forecast
           </button>
           <button
             onClick={() => setViewMode('error')}
-            className={`px-2.5 py-0.5 rounded ${
+            className={`px-2.5 py-1 sm:py-0.5 rounded whitespace-nowrap ${
               viewMode === 'error'
                 ? 'bg-blue-600 text-white font-semibold shadow-xs'
                 : 'hover:text-slate-900'
@@ -116,18 +116,18 @@ export const ActualForecastChart: React.FC<Props> = ({ data, heightClass = 'h-80
       </div>
 
       {/* Main Responsive Chart */}
-      <div className={`w-full ${heightClass}`}>
+      <div className={`w-full min-w-0 ${heightClass}`}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={filteredData}
-            margin={{ top: 10, right: 15, left: 5, bottom: 0 }}
+            margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
           >
             <CartesianGrid strokeDasharray="2 2" stroke="#e2e8f0" vertical={false} />
             <XAxis
               dataKey="delivery_hour"
               tickFormatter={(v) => formatShortDate(v)}
               tick={{ fontSize: 10, fill: '#64748b', fontFamily: 'monospace' }}
-              minTickGap={30}
+              minTickGap={35}
               axisLine={{ stroke: '#cbd5e1' }}
               tickLine={{ stroke: '#cbd5e1' }}
             />
@@ -136,7 +136,7 @@ export const ActualForecastChart: React.FC<Props> = ({ data, heightClass = 'h-80
               tickFormatter={(v) => `${(v / 1000).toFixed(1)}GW`}
               axisLine={{ stroke: '#cbd5e1' }}
               tickLine={{ stroke: '#cbd5e1' }}
-              width={50}
+              width={42}
             />
 
             {viewMode === 'error' && (

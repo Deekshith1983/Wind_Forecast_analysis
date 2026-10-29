@@ -76,10 +76,10 @@ export const LeadTimeAnalysisPage: React.FC = () => {
         </div>
 
         {/* Toggle Sample Mode */}
-        <div className="flex items-center bg-slate-100 p-0.5 rounded border border-slate-200 shrink-0 text-xs">
+        <div className="flex items-center bg-slate-100 p-0.5 rounded border border-slate-200 shrink-0 text-xs w-full sm:w-auto justify-center">
           <button
             onClick={() => setSampleMode('common')}
-            className={`px-3 py-1 font-mono font-semibold rounded transition ${
+            className={`px-3 py-1 font-mono font-semibold rounded transition flex-1 sm:flex-initial text-center ${
               sampleMode === 'common'
                 ? 'bg-blue-600 text-white shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
@@ -89,7 +89,7 @@ export const LeadTimeAnalysisPage: React.FC = () => {
           </button>
           <button
             onClick={() => setSampleMode('full')}
-            className={`px-3 py-1 font-mono font-semibold rounded transition ${
+            className={`px-3 py-1 font-mono font-semibold rounded transition flex-1 sm:flex-initial text-center ${
               sampleMode === 'full'
                 ? 'bg-blue-600 text-white shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
@@ -106,7 +106,7 @@ export const LeadTimeAnalysisPage: React.FC = () => {
           title={`Forecast Error Decay Across Decision Horizons (${sampleMode.toUpperCase()} Sample)`}
           subtitle="MAE and RMSE decay monotonically as decision time approaches physical delivery"
         >
-          <div className="w-full h-72">
+          <div className="w-full h-72 min-w-0">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={accuracyChartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="2 2" stroke="#e2e8f0" vertical={false} />
@@ -139,7 +139,7 @@ export const LeadTimeAnalysisPage: React.FC = () => {
           title="Systematic Over-Forecasting Bias by Horizon"
           subtitle="Mean signed error (Forecast − Actual) across all cutoffs"
         >
-          <div className="w-full h-72">
+          <div className="w-full h-72 min-w-0">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={accuracyChartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="2 2" stroke="#e2e8f0" vertical={false} />
@@ -172,7 +172,7 @@ export const LeadTimeAnalysisPage: React.FC = () => {
             title="Eligible Coverage by Cutoff Horizon"
             subtitle="Shorter cutoffs provide higher coverage of January hours"
           >
-            <div className="w-full h-64">
+            <div className="w-full h-64 min-w-0">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={coverageChartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="2 2" stroke="#e2e8f0" vertical={false} />
