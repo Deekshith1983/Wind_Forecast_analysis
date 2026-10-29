@@ -1,15 +1,6 @@
 # UK Wind Generation Forecast Analytics (Phase 2 & Phase 3)
 
-[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg)](https://fastapi.tiangolo.com/)
-[![Tests Passing](https://img.shields.io/badge/tests-68%20passed-brightgreen.svg)]()
-[![License](https://img.shields.io/badge/license-MIT-green.svg)]()
 
-Production-grade data engineering and quantitative forecast evaluation engine for UK national wind generation (January 2026), built using **FastAPI**, **Pandas**, **NumPy**, and **Pydantic**.
-
-This system bridges the 10-stage Exploratory Data Analysis (EDA) in [`insights.ipynb`](insights.ipynb) with a robust backend architecture designed for energy utility procurement desks operating in the UK Day-Ahead electricity market.
-
----
 
 ## 1. Domain & Business Problem
 
